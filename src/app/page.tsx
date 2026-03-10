@@ -138,10 +138,10 @@ export default function HomePage() {
       <Section id="how">
         <Container>
           <div className="mx-auto max-w-[720px] text-center">
-            <h2 className="text-balance text-3xl font-bold leading-tight tracking-tight text-black sm:text-4xl">
+            <h2 className="text-balance text-4xl font-bold leading-tight tracking-tight text-black sm:text-5xl">
               How it works
             </h2>
-            <p className="mt-3 text-lg leading-relaxed text-text-secondary">
+            <p className="mt-3 text-xl leading-relaxed text-text-secondary">
               We are not consultants or software providers. We work as part of your team, combining restaurant experts and AI engineers to support the design and implementation of custom SOPs, dashboards, and tools to build an AI-empowered franchise operation.
             </p>
           </div>
@@ -151,10 +151,10 @@ export default function HomePage() {
             <Card className="overflow-hidden border-line-subtle bg-bg-surface">
               <div className="grid gap-6 p-6 md:grid-cols-[1fr_1fr] md:items-center">
                 <div>
-                  <h3 className="text-xl font-bold tracking-tight text-black">
+                  <h3 className="text-2xl font-bold tracking-tight text-black">
                     Restaurant experts
                   </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-text-secondary">
+                  <p className="mt-3 text-base leading-relaxed text-text-secondary">
                     Access to seasoned restaurant operators who led multi-location teams across the United States.
                   </p>
                 </div>
@@ -174,10 +174,10 @@ export default function HomePage() {
             <Card className="overflow-hidden border-line-subtle bg-bg-surface">
               <div className="grid gap-6 p-6 md:grid-cols-[1fr_1fr] md:items-center">
                 <div>
-                  <h3 className="text-xl font-bold tracking-tight text-black">
+                  <h3 className="text-2xl font-bold tracking-tight text-black">
                     AI engineers
                   </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-text-secondary">
+                  <p className="mt-3 text-base leading-relaxed text-text-secondary">
                     Engineers and technologists who build AI agents and tools that deliver insights at the exact moment of decision—no waiting days for analyses.
                   </p>
                 </div>
@@ -197,10 +197,10 @@ export default function HomePage() {
             <Card className="overflow-hidden border-line-subtle bg-bg-surface">
               <div className="grid gap-6 p-6 md:grid-cols-[1fr_1fr] md:items-center">
                 <div>
-                  <h3 className="text-xl font-bold tracking-tight text-black">
+                  <h3 className="text-2xl font-bold tracking-tight text-black">
                     Custom software
                   </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-text-secondary">
+                  <p className="mt-3 text-base leading-relaxed text-text-secondary">
                     Tools built specifically for your business. Walk away with software that works for you, not against you.
                   </p>
                 </div>
