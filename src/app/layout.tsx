@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import "./globals.css";
 import { Inter } from "next/font/google";
 
@@ -7,7 +6,7 @@ const inter = Inter({
   display: "swap",
 });
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "Franchir",
   description:
     "Real-time franchise operations cockpit and SOP apps for multi-location restaurant owners.",
