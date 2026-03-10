@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================
+   Design Tokens (Single Source of Truth)
+   Cool, premium, operator
+   ========================= */
+
+:root {
+  /* Backgrounds */
+  --bg-primary: 244 246 248;     /* #F4F6F8 */
+  --bg-section-alt: 238 242 246; /* #EEF2F6 */
+  --bg-surface: 255 255 255;     /* #FFFFFF */
+
+  /* Text */
+  --text-primary: 15 23 42;      /* #0F172A */
+  --text-secondary: 71 85 105;   /* #475569 */
+  --text-muted: 100 116 139;     /* #64748B */
+
+  /* Lines */
+  --border-subtle: 226 232 240;  /* #E2E8F0 */
+  --divider: 203 213 225;        /* #CBD5E1 */
+
+  /* Brand */
+  --primary: 47 75 184;          /* #2F4BB8 */
+  --primary-hover: 37 62 150;    /* #253E96 */
+  --primary-subtle: 238 242 255; /* #EEF2FF */
+  --secondary: 51 65 85;         /* #334155 */
+  --secondary-hover: 30 41 59;   /* #1E293B */
+
+  /* Semantic */
+  --success: 46 111 94;          /* #2E6F5E */
+  --success-subtle: 234 244 241;
+  --warning: 139 107 46;         /* #8B6B2E */
+  --warning-subtle: 247 241 230;
+  --error: 140 58 58;            /* #8C3A3A */
+  --error-subtle: 247 234 234;
+  --info: 62 92 125;             /* #3E5C7D */
+  --info-subtle: 234 241 248;
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+
+  /* Shadow (rare) */
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
+  --shadow-md: 0 12px 28px rgba(15, 23, 42, 0.14);
+}
+
+/* Optional dark mode tokens if you want later:
+.dark { ... }
+*/
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background: rgb(var(--bg-primary));
+  color: rgb(var(--text-primary));
+}
