@@ -86,9 +86,7 @@ export default function HomePage() {
               </h1>
 
               <p className="max-w-[540px] text-base font-normal leading-relaxed text-text-secondary">
-                Franchir is the AI-native franchise ERP that gives owners
-                and ops teams a single place to see performance, enforce SOPs,
-                and spin up custom software that works for you not against you.
+                Restaurant specialists, AI engineers, and custom-built tools to build an AI-native franchise operations function.
               </p>
 
               <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
