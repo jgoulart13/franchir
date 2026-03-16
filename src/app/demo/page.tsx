@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { createClient } from "@/lib/supabase/client";
+import { useRouter } from "next/navigation";
 
 type FormState = {
   name: string;
@@ -22,6 +24,8 @@ export default function DemoPage() {
   });
   const [touched, setTouched] = React.useState<Record<string, boolean>>({});
   const [submitting, setSubmitting] = React.useState(false);
+  const [submitError, setSubmitError] = React.useState<string | null>(null);
+  const router = useRouter();
 
   const errors = {
     name: form.name.trim() ? "" : "Name is required.",
@@ -34,13 +38,28 @@ export default function DemoPage() {
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     setTouched({ name: true, email: true, company: true });
+    setSubmitError(null);
     if (!canSubmit) return;
 
     setSubmitting(true);
     try {
-      // Replace with your real submit
-      await new Promise((r) => setTimeout(r, 600));
-      alert("Submitted (wire up to your backend).");
+      const supabase = createClient();
+      const { error } = await supabase.from("demo_requests").insert({
+        name: form.name.trim(),
+        email: form.email.trim().toLowerCase(),
+        company: form.company.trim(),
+        status: "pending",
+      });
+
+      if (error) {
+        throw error;
+      }
+
+      router.push("/demo/success");
+    } catch (error) {
+      setSubmitError(
+        error instanceof Error ? error.message : "Something went wrong. Please try again."
+      );
     } finally {
       setSubmitting(false);
     }
@@ -141,17 +160,22 @@ export default function DemoPage() {
                   </div>
                 </CardContent>
 
-                <CardFooter className="flex items-center justify-between gap-3">
-                  <p className="text-sm text-text-muted">
-                    Response within 1–2 business days.
-                  </p>
-                  <Button
-                    type="submit"
-                    disabled={!canSubmit || submitting}
-                    className="bg-brand-primary hover:bg-brand-primaryHover"
-                  >
-                    {submitting ? "Sending…" : "Send request"}
-                  </Button>
+                <CardFooter className="flex flex-col gap-3">
+                  {submitError && (
+                    <p className="w-full text-sm text-semantic-error">{submitError}</p>
+                  )}
+                  <div className="flex w-full items-center justify-between gap-3">
+                    <p className="text-sm text-text-muted">
+                      Response within 1–2 business days.
+                    </p>
+                    <Button
+                      type="submit"
+                      disabled={!canSubmit || submitting}
+                      className="bg-brand-primary hover:bg-brand-primaryHover"
+                    >
+                      {submitting ? "Sending…" : "Send request"}
+                    </Button>
+                  </div>
                 </CardFooter>
               </form>
             </Card>
