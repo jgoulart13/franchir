@@ -11,16 +11,18 @@ import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 
 type FormState = {
-  name: string;
+  firstName: string;
+  lastName: string;
+  business: string;
   email: string;
-  company: string;
 };
 
 export default function DemoPage() {
   const [form, setForm] = React.useState<FormState>({
-    name: "",
+    firstName: "",
+    lastName: "",
+    business: "",
     email: "",
-    company: "",
   });
   const [touched, setTouched] = React.useState<Record<string, boolean>>({});
   const [submitting, setSubmitting] = React.useState(false);
@@ -28,16 +30,17 @@ export default function DemoPage() {
   const router = useRouter();
 
   const errors = {
-    name: form.name.trim() ? "" : "Name is required.",
-    company: form.company.trim() ? "" : "Company is required.",
+    firstName: form.firstName.trim() ? "" : "First name is required.",
+    lastName: form.lastName.trim() ? "" : "Last name is required.",
+    business: form.business.trim() ? "" : "Business is required.",
     email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email) ? "" : "Please enter a valid email.",
   };
 
-  const canSubmit = !errors.name && !errors.email && !errors.company;
+  const canSubmit = !errors.firstName && !errors.lastName && !errors.business && !errors.email;
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setTouched({ name: true, email: true, company: true });
+setTouched({ firstName: true, lastName: true, business: true, email: true });
     setSubmitError(null);
     if (!canSubmit) return;
 
@@ -45,9 +48,9 @@ export default function DemoPage() {
     try {
       const supabase = createClient();
       const { error } = await supabase.from("demo_requests").insert({
-        name: form.name.trim(),
+        name: `${form.firstName.trim()} ${form.lastName.trim()}`.trim(),
         email: form.email.trim().toLowerCase(),
-        company: form.company.trim(),
+        company: form.business.trim(),
         status: "pending",
       });
 
@@ -69,13 +72,12 @@ export default function DemoPage() {
     <main>
       <Section>
         <Container>
-          <div className="mx-auto max-w-[720px]">
-            <h1 className="text-balance text-4xl font-bold leading-tight tracking-tight text-text-primary sm:text-5xl">
-              Request a demo
+          <div className="max-w-[720px]">
+            <h1 className="text-balance text-4xl font-bold leading-tight tracking-tight text-brand-primary sm:text-5xl">
+              Get a demo
             </h1>
             <p className="mt-4 text-lg leading-relaxed text-text-secondary">
-              Tell us a bit about your workflow. We’ll respond with a tight plan,
-              not a pitch deck.
+              Share your contact information and we’ll reach out to schedule a walkthrough.
             </p>
           </div>
 
@@ -91,9 +93,9 @@ export default function DemoPage() {
               </CardHeader>
               <CardContent className="space-y-3 text-text-secondary">
                 <ul className="list-disc space-y-2 pl-5">
-                  <li>Clear scope & success criteria</li>
-                  <li>How we handle trust, guardrails, and failure states</li>
-                  <li>Integration approach and timelines</li>
+                  <li>Open conversation on your needs</li>
+                  <li>Discussion on outcomes you want to drive</li>
+                  <li>Scope, integration approach and timelines</li>
                 </ul>
               </CardContent>
             </Card>
@@ -104,30 +106,57 @@ export default function DemoPage() {
                   <CardTitle className="text-xl text-text-primary">
                     Contact details
                   </CardTitle>
-                  <CardDescription className="text-text-secondary">
-                    We validate on blur. No fluff.
-                  </CardDescription>
                 </CardHeader>
 
                 <CardContent className="space-y-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="name">Name</Label>
-                    <Input
-                      id="name"
-                      value={form.name}
-                      onChange={(e) => setForm({ ...form, name: e.target.value })}
-                      onBlur={() => setTouched((t) => ({ ...t, name: true }))}
-                      aria-invalid={!!(touched.name && errors.name)}
-                    />
-                    {touched.name && errors.name ? (
-                      <p className="text-sm text-semantic-error">{errors.name}</p>
-                    ) : (
-                      <p className="text-sm text-text-muted">Your full name.</p>
-                    )}
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    <div className="space-y-2">
+                      <Label htmlFor="firstName">First name</Label>
+                      <Input
+                        id="firstName"
+                        value={form.firstName}
+                        onChange={(e) => setForm({ ...form, firstName: e.target.value })}
+                        onBlur={() => setTouched((t) => ({ ...t, firstName: true }))}
+                        aria-invalid={!!(touched.firstName && errors.firstName)}
+                        placeholder="Jane"
+                      />
+                      {touched.firstName && errors.firstName ? (
+                        <p className="text-sm text-semantic-error">{errors.firstName}</p>
+                      ) : null}
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="lastName">Last name</Label>
+                      <Input
+                        id="lastName"
+                        value={form.lastName}
+                        onChange={(e) => setForm({ ...form, lastName: e.target.value })}
+                        onBlur={() => setTouched((t) => ({ ...t, lastName: true }))}
+                        aria-invalid={!!(touched.lastName && errors.lastName)}
+                        placeholder="Smith"
+                      />
+                      {touched.lastName && errors.lastName ? (
+                        <p className="text-sm text-semantic-error">{errors.lastName}</p>
+                      ) : null}
+                    </div>
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="email">Work email</Label>
+                    <Label htmlFor="business">Business</Label>
+                    <Input
+                      id="business"
+                      value={form.business}
+                      onChange={(e) => setForm({ ...form, business: e.target.value })}
+                      onBlur={() => setTouched((t) => ({ ...t, business: true }))}
+                      aria-invalid={!!(touched.business && errors.business)}
+                      placeholder="Your company or brand"
+                    />
+                    {touched.business && errors.business ? (
+                      <p className="text-sm text-semantic-error">{errors.business}</p>
+                    ) : null}
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="email">Email</Label>
                     <Input
                       id="email"
                       type="email"
@@ -135,27 +164,12 @@ export default function DemoPage() {
                       onChange={(e) => setForm({ ...form, email: e.target.value })}
                       onBlur={() => setTouched((t) => ({ ...t, email: true }))}
                       aria-invalid={!!(touched.email && errors.email)}
+                      placeholder="you@company.com"
                     />
                     {touched.email && errors.email ? (
                       <p className="text-sm text-semantic-error">{errors.email}</p>
                     ) : (
                       <p className="text-sm text-text-muted">We’ll never spam.</p>
-                    )}
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="company">Company</Label>
-                    <Input
-                      id="company"
-                      value={form.company}
-                      onChange={(e) => setForm({ ...form, company: e.target.value })}
-                      onBlur={() => setTouched((t) => ({ ...t, company: true }))}
-                      aria-invalid={!!(touched.company && errors.company)}
-                    />
-                    {touched.company && errors.company ? (
-                      <p className="text-sm text-semantic-error">{errors.company}</p>
-                    ) : (
-                      <p className="text-sm text-text-muted">Your org name.</p>
                     )}
                   </div>
                 </CardContent>

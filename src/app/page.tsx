@@ -29,50 +29,6 @@ function FeatureChip({ label }: { label: string }) {
 export default function HomePage() {
   return (
     <main>
-      {/* Top nav, denser like Campfire */}
-      <div className="sticky top-0 z-20 border-b border-line-subtle bg-bg-primary/90 backdrop-blur">
-        <Container className="flex h-14 items-center justify-between">
-          <div className="flex items-center gap-2.5">
-            {/* Logo: interlocking L shapes — partnership, connection (wide, not square) */}
-            <svg
-              width="32"
-              height="22"
-              viewBox="0 0 36 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="shrink-0"
-              aria-hidden
-            >
-              <path d="M2 2h6v16h16v6H2V2z" className="fill-brand-primary" />
-              <path d="M12 2h16v6h6v16h-6V8H12V2z" className="fill-brand-primaryHover" />
-            </svg>
-            <div className="text-sm font-semibold tracking-tight text-text-primary">
-              Franchir
-            </div>
-          </div>
-          <div className="flex items-center gap-3 text-sm">
-            <nav className="hidden items-center gap-4 text-text-secondary sm:flex">
-              <Link href="#how" className="hover:text-text-primary">
-                How it works
-              </Link>
-              <Link href="#product" className="hover:text-text-primary">
-                Product
-              </Link>
-            </nav>
-            <Button variant="ghost" asChild className="hidden sm:inline-flex">
-              <Link href="/demo">Log in</Link>
-            </Button>
-            <Button
-              size="sm"
-              className="bg-brand-primary hover:bg-brand-primaryHover"
-              asChild
-            >
-              <Link href="/demo">Get a demo</Link>
-            </Button>
-          </div>
-        </Container>
-      </div>
-
       {/* Hero: two-column, product-forward, on subtle brand-tinted background */}
       <div className="bg-brand-primarySubtle/60 border-b border-line-subtle">
         <Section>
@@ -104,7 +60,7 @@ export default function HomePage() {
                 <FeatureChip label="Real-time multi-location dashboards" />
                 <FeatureChip label="Production planning widgets" />
                 <FeatureChip label="SOP apps instead of spreadsheets" />
-                <FeatureChip label="AI insights backed by franchise experts" />
+                <FeatureChip label="AI insights backed by restaurant experts" />
               </div>
             </div>
 
