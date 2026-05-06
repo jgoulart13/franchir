@@ -32,9 +32,6 @@ export function Header() {
               Product
             </Link>
           </nav>
-          <Button variant="ghost" asChild className="hidden sm:inline-flex">
-            <Link href="/demo">Log in</Link>
-          </Button>
           <Button variant="default" size="sm" asChild>
             <Link href="/demo">Get a demo</Link>
           </Button>
