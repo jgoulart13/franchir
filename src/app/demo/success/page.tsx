@@ -21,9 +21,10 @@ export default function DemoSuccessPage() {
               </CardHeader>
               <CardContent className="space-y-6">
                 <p className="text-text-secondary">
-                  Thank you for your interest in Franchir. Our team will review your
-                  request and reach out with a personalized demo plan tailored to
-                  your franchise operations.
+                  Thank you for your interest in Franchir. Our team will reach out
+                  to schedule a brief discovery call to learn about your franchise
+                  operations. This helps us tailor a personalized demo experience
+                  just for you.
                 </p>
                 <div className="flex justify-center gap-4">
                   <Button asChild variant="outline" className="border-line-subtle">
